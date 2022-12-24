@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('profile', ProfileController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/createjob', [JobController::class, 'store']);
     
     Route::get('/data', function () {
         return 'user data';
