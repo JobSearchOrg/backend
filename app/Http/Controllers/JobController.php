@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //All Profile Data
+        $jobsData = Job::all();
+        return response([
+            'data' => $jobsData,
+        ], 200);
+    }
+
     //create Job
     public function store(JobRequest $request)
     {
