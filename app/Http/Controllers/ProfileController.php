@@ -17,8 +17,9 @@ class ProfileController extends Controller
     {
         //All Profile Data
         $usersData = Profile::all();
+        $data = json_decode($usersData);
         return response([
-            'data' => $usersData,
+            'data' => $data,
         ], 200);
     }
 

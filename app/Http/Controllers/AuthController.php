@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -25,9 +26,15 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
+        Profile::create([
+            'user_id' => $user->id,
+            'first_name' => $fields['first_name'],
+            'last_name' => $fields['last_name'],
+            'email' => $fields['email'],
+        ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
-       
+
         $response = [
             'user' => $user,
             'token' => $token

@@ -26,11 +26,12 @@ class ProfileRequest extends FormRequest
         return [
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
+            'image' => 'required|mimes:jpeg,png,jpg|max:10000',
             'email' => 'required|email|max:255',
             'phone' => 'required|regex:/(01)[0-9]{9}/',
             'city' => 'required|string|max:100',
             'resume' => 'required|mimes:pdf|max:10000',
-            'questions' => 'string',
+            'languages' => 'required',
             'prev_job' => 'string',
         ];
     }
@@ -41,12 +42,12 @@ class ProfileRequest extends FormRequest
      * @return array
      */
 
-    public function messages()
-    {
-        return [
-            'first_name.required' => 'Email is required!',
-            'last_name.required' => 'Name is required!',
-            'password.required' => 'Password is required!'
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'first_name.required' => 'Email is required!',
+    //         'last_name.required' => 'Name is required!',
+    //         'password.required' => 'Password is required!'
+    //     ];
+    // }
 }
