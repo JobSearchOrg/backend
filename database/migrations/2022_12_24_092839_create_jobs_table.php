@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->string("user_id");
             $table->boolean('open')->default(true);
             $table->string('company');
             $table->string('avatar');
