@@ -20,4 +20,5 @@ class Profile extends Model
         'questions',
         'prev_job',
     ];
+
 }

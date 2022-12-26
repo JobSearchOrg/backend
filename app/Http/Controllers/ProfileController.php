@@ -41,18 +41,18 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $userReume = $request->file('resume')->store('resumes', 'public');
-
+        $userResume = $request->file('resume')->store('resumes', 'public');
+        $image = $request->file('image')->store('profiles', 'public');
         $userData = Profile::create([
             'user_id' => auth()->id(),
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'image' => $image,
             'email' => $request->email,
             'phone' => $request->phone,
             'city' => $request->city,
-            'resume' => $userReume,
-            'questions'=> json_encode($request->questions),
-            'prev_job'=> json_encode($request->prev_job),
+            'resume' => $userResume,
+            'prev_job' => json_encode($request->prev_job),
         ]);
         $response = [
             'message' => 'User profile Added',
@@ -70,7 +70,13 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        //
+        //get specific profile info
+        $profileData = Profile::find($profile)->first();
+        $response = [
+            'data' => $profileData,
+        ];
+
+        return response()->json($response, 200);
     }
 
     /**
@@ -91,9 +97,30 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(ProfileRequest $request, Profile $profile)
     {
-        //
+
+        $userResume = $request->file('resume')->store('resumes', 'public');
+        $image = $request->file('image')->store('profiles', 'public');
+
+        $profile->update([
+            'user_id' => auth()->id(),
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'image' => $image,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'city' => $request->city,
+            'resume' => $userResume,
+            'prev_job' => json_encode($request->prev_job),
+        ]);
+        $response = [
+            'message' => 'User profile Added',
+            'data' => $profile,
+        ];
+
+
+        return response($response, 200);
     }
 
     /**
@@ -104,6 +131,12 @@ class ProfileController extends Controller
      */
     public function destroy(Profile $profile)
     {
-        //
+        //destroy profile 
+        $profile->delete();
+        $response = [
+            'message' => "Delete User Profile",
+        ];
+
+        return response()->json($response, 200);
     }
 }
