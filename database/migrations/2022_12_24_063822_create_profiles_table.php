@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string("phone")->nullable();
             $table->string("city")->nullable();
             $table->string("resume")->nullable();
-            $table->string("languages")->nullable();
-            $table->string("prev_job")->nullable();
+            $table->json("languages")->nullable();
+            $table->json("prev_job")->nullable();
             $table->timestamps();
         });
     }

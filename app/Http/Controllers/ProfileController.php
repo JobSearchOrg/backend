@@ -52,6 +52,7 @@ class ProfileController extends Controller
             'phone' => $request->phone,
             'city' => $request->city,
             'resume' => $userResume,
+            'languages' => $request->languages,
             'prev_job' => json_encode($request->prev_job),
         ]);
         $response = [
@@ -70,12 +71,7 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        //get specific profile info
-        $profileData = Profile::find($profile)->first();
-        $response = [
-            'data' => $profileData,
-        ];
-
+        $response = ['data' => $profile];
         return response()->json($response, 200);
     }
 
@@ -97,29 +93,21 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileRequest $request, Profile $profile)
+    public function update(Request $request, Profile $profile)
     {
+        $profile->first_name = $request->first_name;
+        $profile->last_name = $request->last_name;
+        $profile->email = $request->email;
+        $profile->phone = $request->phone;
+        $profile->city = $request->city;
+        $profile->languages = $request->languages;
+        $profile->prev_job = $request->prev_job;
+        $profile->save();
 
-        $userResume = $request->file('resume')->store('resumes', 'public');
-        $image = $request->file('image')->store('profiles', 'public');
-
-        $profile->update([
-            'user_id' => auth()->id(),
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'image' => $image,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'city' => $request->city,
-            'resume' => $userResume,
-            'prev_job' => json_encode($request->prev_job),
-        ]);
         $response = [
             'message' => 'User profile Added',
             'data' => $profile,
         ];
-
-
         return response($response, 200);
     }
 

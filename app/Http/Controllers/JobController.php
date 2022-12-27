@@ -17,6 +17,7 @@ class JobController extends Controller
     {
         //All Profile Data
         $jobsData = Job::all();
+   
         return response([
             'data' => $jobsData,
         ], 200);
@@ -34,10 +35,11 @@ class JobController extends Controller
             'avatar' => $jobImage,
             'location' => $request->location,
             'jobTitle' => $request->jobTitle,
+            'slag' => $request->slag,
             'jobType' => $request->jobType,
             'employmentType' => $request->employmentType,
             'experience' => $request->experience,
-            'categories' => json_encode($request->categories),
+            'category' => $request->category,
         ]);
         $response = [
             'message' => 'Job Added Successfully',

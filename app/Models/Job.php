@@ -15,9 +15,15 @@ class Job extends Model
         'avatar',
         'location',
         'jobTitle',
+        'slag',
         'jobType',
         'employmentType',
         'experience',
-        'categories',
+        'category',
     ];
+
+    public function categories()
+    {
+        return $this->belongsTo(Category::class, 'category_id', "id");
+    }
 }

@@ -21,4 +21,8 @@ class Profile extends Model
         'prev_job',
     ];
 
+    protected $casts = [
+        'languages' => 'array',
+        'prev_job' => 'array'
+    ];
 }

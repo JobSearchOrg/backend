@@ -24,15 +24,15 @@ class JobRequest extends FormRequest
     public function rules()
     {
         return [
-            'open' => 'required|boolean',
             'company' => 'required|string|max:255',
             'avatar' => 'required|mimes:jpeg,png,jpg|max:10000',
             'location' => 'required|string|max:255',
             'jobTitle' => 'required|string|max:255',
+            'slag' => 'required|string|max:255|unique:jobs',
             'jobType' => 'required|string|max:255',
             'employmentType' => 'required|string|max:255',
             'experience' => 'required|string|max:255',
-            'categories' => 'string',
+            'category' => 'required|string',
         ];
     }
 }

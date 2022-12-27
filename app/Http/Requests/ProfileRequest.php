@@ -31,7 +31,7 @@ class ProfileRequest extends FormRequest
             'phone' => 'required|regex:/(01)[0-9]{9}/',
             'city' => 'required|string|max:100',
             'resume' => 'required|mimes:pdf|max:10000',
-            'languages' => 'required',
+            'languages' => 'required|array',
             'prev_job' => 'string',
         ];
     }

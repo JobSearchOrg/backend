@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -25,10 +26,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('profile', ProfileController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/createjob', [JobController::class, 'store']);
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::post('/category', [CategoryController::class, 'store']);
     
-    Route::get('/data', function () {
-        return 'user data';
-    });
+ 
 });
 
 Route::get('/hello', function () {
