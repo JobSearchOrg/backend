@@ -34,8 +34,6 @@ public function show($slug)
     //create Job
     public function store(JobRequest $request)
     {
-        
-
         $userData = Job::create([
             'user_id' => auth()->id(),
             'open' => true,
@@ -43,7 +41,7 @@ public function show($slug)
             'avatar' => $request->avatar,
             'location' => $request->location,
             'jobTitle' => $request->jobTitle,
-            'slag' => $request->slag,
+            'slug' => $request->slug,
             'jobType' => $request->jobType,
             'employmentType' => $request->employmentType,
             'experience' => $request->experience,

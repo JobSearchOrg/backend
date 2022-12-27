@@ -15,7 +15,7 @@ class Job extends Model
         'avatar',
         'location',
         'jobTitle',
-        'slag',
+        'slug',
         'jobType',
         'employmentType',
         'experience',

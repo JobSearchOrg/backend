@@ -31,7 +31,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('profile', ProfileController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/createjob', [JobController::class, 'store']);
-    Route::post('/category', [CategoryController::class, 'store']);
     Route::post('/upload', [FileUploadController::class, 'fileStore']);
     Route::post('/apply', [ApplyJobController::class, 'applyJob']);
 });

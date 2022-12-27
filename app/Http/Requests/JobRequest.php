@@ -28,7 +28,7 @@ class JobRequest extends FormRequest
             'avatar' => 'required|string',
             'location' => 'required|string|max:255',
             'jobTitle' => 'required|string|max:255',
-            'slag' => 'required|string|max:255|unique:jobs',
+            'slug' => 'required|string|max:255|unique:jobs',
             'jobType' => 'required|string|max:255',
             'employmentType' => 'required|string|max:255',
             'experience' => 'required|string|max:255',

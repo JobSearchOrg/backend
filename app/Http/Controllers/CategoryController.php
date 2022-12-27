@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -11,12 +12,21 @@ class CategoryController extends Controller
     public function index()
     {
         //All Category Data
-       return $category = Category::withCount('jobs')->get();
+        $category_list =[];
+        $categories = array("Design", "Sales", "Marketing", "Finance", "Technology", "Engineering", "Business", "Human Resource");
+        foreach ($categories as $category) {
+           $data = Job::where('category', $category)->count();
+            array_push($category_list, (object)[
+                'category' => $category,
+                'available' => $data,
+            ]);
+        }
+
         return response([
-            'data' => $category,
+            'data' => $category_list,
         ], 200);
     }
-    
+
     public function store(Request $request)
     {
 
