@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/search/jobtitle={jobTitle}&location={location}', [JobController::class, 'search']);
 // Protected Routes 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('profile', ProfileController::class);
@@ -28,8 +29,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/createjob', [JobController::class, 'store']);
     Route::get('/category', [CategoryController::class, 'index']);
     Route::post('/category', [CategoryController::class, 'store']);
-    
- 
 });
 
 Route::get('/hello', function () {

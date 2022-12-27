@@ -17,7 +17,7 @@ class JobController extends Controller
     {
         //All Profile Data
         $jobsData = Job::all();
-   
+
         return response([
             'data' => $jobsData,
         ], 200);
@@ -30,7 +30,7 @@ class JobController extends Controller
 
         $userData = Job::create([
             'user_id' => auth()->id(),
-            'open' => $request->open,
+            'open' => true,
             'company' => $request->company,
             'avatar' => $jobImage,
             'location' => $request->location,
@@ -47,5 +47,19 @@ class JobController extends Controller
         ];
 
         return response($response, 201);
+    }
+
+    // search jobs 
+    public function search($jobTitle,$location)
+    {
+        $jobs = Job::where('jobTitle', 'LIKE', '%' . $jobTitle . '%');
+    
+        if ($location != 'ALL') {
+            $jobs->where('location', $location);
+        }
+        $jobData = $jobs->get();
+        return response([
+            'data' => $jobData,
+        ], 200);
     }
 }
