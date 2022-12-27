@@ -26,11 +26,11 @@ class ProfileRequest extends FormRequest
         return [
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            'image' => 'required|mimes:jpeg,png,jpg|max:10000',
+            'image' => 'required|string',
             'email' => 'required|email|max:255',
             'phone' => 'required|regex:/(01)[0-9]{9}/',
             'city' => 'required|string|max:100',
-            'resume' => 'required|mimes:pdf|max:10000',
+            'resume' => 'required|string',
             'languages' => 'required|array',
             'prev_job' => 'string',
         ];

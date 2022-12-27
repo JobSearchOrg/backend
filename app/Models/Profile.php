@@ -23,6 +23,7 @@ class Profile extends Model
 
     protected $casts = [
         'languages' => 'array',
+        'questions' => 'array',
         'prev_job' => 'array'
     ];
 }

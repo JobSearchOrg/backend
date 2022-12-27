@@ -16,8 +16,16 @@ class JobController extends Controller
     public function index()
     {
         //All Profile Data
-        $jobsData = Job::all();
+        $jobsData = Job::orderBy('created_at', 'desc')->get();
 
+        return response([
+            'data' => $jobsData,
+        ], 200);
+    }
+// get single jobs 
+public function show($slug)
+{
+        $jobsData =Job::where('slug', $slug)->first();
         return response([
             'data' => $jobsData,
         ], 200);
@@ -26,13 +34,13 @@ class JobController extends Controller
     //create Job
     public function store(JobRequest $request)
     {
-        $jobImage = $request->file('avatar')->store('jobAvatar', 'public');
+        
 
         $userData = Job::create([
             'user_id' => auth()->id(),
             'open' => true,
             'company' => $request->company,
-            'avatar' => $jobImage,
+            'avatar' => $request->avatar,
             'location' => $request->location,
             'jobTitle' => $request->jobTitle,
             'slag' => $request->slag,

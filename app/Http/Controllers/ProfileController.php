@@ -41,20 +41,20 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $userResume = $request->file('resume')->store('resumes', 'public');
-        $image = $request->file('image')->store('profiles', 'public');
+
         $userData = Profile::create([
             'user_id' => auth()->id(),
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'image' => $image,
+            'image' => $request->image,
             'email' => $request->email,
             'phone' => $request->phone,
             'city' => $request->city,
-            'resume' => $userResume,
+            'resume' => $request->resume,
             'languages' => $request->languages,
-            'prev_job' => json_encode($request->prev_job),
+            'prev_job' => $request->prev_job,
         ]);
+        
         $response = [
             'message' => 'User profile Added',
             'data' => $userData,

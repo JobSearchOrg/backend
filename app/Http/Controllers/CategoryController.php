@@ -16,6 +16,7 @@ class CategoryController extends Controller
             'data' => $category,
         ], 200);
     }
+    
     public function store(Request $request)
     {
 

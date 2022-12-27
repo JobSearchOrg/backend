@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
@@ -21,14 +22,16 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/job/{slug}', [JobController::class, 'show']);
 Route::get('/search/jobtitle={jobTitle}&location={location}', [JobController::class, 'search']);
+Route::get('/categories', [CategoryController::class, 'index']);
 // Protected Routes 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('profile', ProfileController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/createjob', [JobController::class, 'store']);
-    Route::get('/category', [CategoryController::class, 'index']);
     Route::post('/category', [CategoryController::class, 'store']);
+    Route::post('/upload', [FileUploadController::class, 'fileStore']);
 });
 
 Route::get('/hello', function () {

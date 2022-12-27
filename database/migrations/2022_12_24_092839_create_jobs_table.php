@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('avatar');
             $table->string('location');
             $table->string('jobTitle');
-            $table->string('slag')->unique();
+            $table->string('slug')->unique();
             $table->string('jobType');
             $table->string('employmentType');
             $table->string('experience');
