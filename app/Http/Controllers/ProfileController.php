@@ -52,9 +52,10 @@ class ProfileController extends Controller
             'city' => $request->city,
             'resume' => $request->resume,
             'languages' => $request->languages,
+            'questions' => $request->questions,
             'prev_job' => $request->prev_job,
         ]);
-        
+
         $response = [
             'message' => 'User profile Added',
             'data' => $userData,
@@ -101,6 +102,7 @@ class ProfileController extends Controller
         $profile->phone = $request->phone;
         $profile->city = $request->city;
         $profile->languages = $request->languages;
+        $profile->questions = $request->questions;
         $profile->prev_job = $request->prev_job;
         $profile->save();
 
