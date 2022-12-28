@@ -24,7 +24,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/jobs', [JobController::class, 'index']);
 Route::get('/job/{slug}', [JobController::class, 'show']);
-Route::get('/search/jobtitle={jobTitle}&location={location}', [JobController::class, 'search']);
+Route::get('/search', [JobController::class, 'search']);
 Route::get('/categories', [CategoryController::class, 'index']);
 // Protected Routes 
 Route::group(['middleware' => ['auth:sanctum']], function () {

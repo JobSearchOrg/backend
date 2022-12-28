@@ -15,10 +15,13 @@ class Job extends Model
         'avatar',
         'location',
         'jobTitle',
+        'description',
         'slug',
         'jobType',
         'employmentType',
         'experience',
+        'salary',
+        'jobLevel',
         'category',
     ];
 

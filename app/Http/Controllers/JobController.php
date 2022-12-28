@@ -22,10 +22,10 @@ class JobController extends Controller
             'data' => $jobsData,
         ], 200);
     }
-// get single jobs 
-public function show($slug)
-{
-        $jobsData =Job::where('slug', $slug)->first();
+    // get single jobs 
+    public function show($slug)
+    {
+        $jobsData = Job::where('slug', $slug)->first();
         return response([
             'data' => $jobsData,
         ], 200);
@@ -41,10 +41,13 @@ public function show($slug)
             'avatar' => $request->avatar,
             'location' => $request->location,
             'jobTitle' => $request->jobTitle,
+            'description' => $request->description,
             'slug' => $request->slug,
             'jobType' => $request->jobType,
             'employmentType' => $request->employmentType,
             'experience' => $request->experience,
+            'salary' => $request->salary,
+            'jobLevel' => $request->jobLevel,
             'category' => $request->category,
         ]);
         $response = [
@@ -56,13 +59,29 @@ public function show($slug)
     }
 
     // search jobs 
-    public function search($jobTitle,$location)
+    public function search(Request $request)
     {
-        $jobs = Job::where('jobTitle', 'LIKE', '%' . $jobTitle . '%');
-    
-        if ($location != 'ALL') {
-            $jobs->where('location', $location);
+        $jobs = Job::where('jobTitle', 'LIKE', '%' . $request->jobTitle . '%');
+
+        if ($request->location != 'ALL') {
+            $jobs->where('location', $request->location);
         }
+        if ($request->jobType) {
+            $jobs->where('jobType', "=", $request->jobType);
+        }
+        if ($request->category) {
+            $jobs->where('category', "=", $request->category);
+        }
+        if ($request->jobLevel) {
+            $jobs->where('jobLevel', '=', $request->jobLevel);
+        }
+        if ($request->range) {
+            $strSplit = explode("-", $request->range);
+            $minRange = $strSplit[0];
+            $maxRange = $strSplit[1];
+            $jobs->whereBetween('salary', [$minRange, $maxRange]);
+        }
+
         $jobData = $jobs->get();
         return response([
             'data' => $jobData,

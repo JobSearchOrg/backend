@@ -22,10 +22,13 @@ return new class extends Migration
             $table->string('avatar');
             $table->string('location');
             $table->string('jobTitle');
+            $table->string('description');
             $table->string('slug')->unique();
             $table->string('jobType');
+            $table->string('salary');
             $table->string('employmentType');
             $table->string('experience');
+            $table->string('jobLevel');
             $table->string("category");
             $table->timestamps();
         });
