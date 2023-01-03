@@ -26,6 +26,7 @@ Route::get('/jobs', [JobController::class, 'index']);
 Route::get('/job/{slug}', [JobController::class, 'show']);
 Route::get('/search', [JobController::class, 'search']);
 Route::get('/categories', [CategoryController::class, 'index']);
+
 // Protected Routes 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('profile', ProfileController::class);

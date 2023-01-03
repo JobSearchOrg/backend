@@ -61,22 +61,37 @@ class JobController extends Controller
     // search jobs 
     public function search(Request $request)
     {
-        $jobs = Job::where('jobTitle', 'LIKE', '%' . $request->jobTitle . '%');
+        // $jobTitle, $location, $jobtype, $category, $joblevel, $range
+        $jobTitle = $request->input('title');
+        $location = $request->input('location');
+        $employmentType = $request->input('employmentType');
+        $category = $request->input('categories');
+        $joblevel = $request->input('jobLevel');
+        $salary = $request->input('salary');
+        $jobtype = $request->input('jobtype');
 
-        if ($request->location != 'ALL') {
-            $jobs->where('location', $request->location);
+
+        $jobs = Job::where('jobTitle', 'LIKE', '%' . $jobTitle . '%');
+
+        if ($location != 'ALL') {
+            $jobs->where('location', $location);
         }
-        if ($request->jobType) {
-            $jobs->where('jobType', "=", $request->jobType);
+        if ($employmentType) {
+            $jobs->where('employmentType', "=", $employmentType);
         }
-        if ($request->category) {
-            $jobs->where('category', "=", $request->category);
+        if ($category) {
+            $jobs->where('category', "=", $category);
         }
-        if ($request->jobLevel) {
-            $jobs->where('jobLevel', '=', $request->jobLevel);
+        if ($jobtype) {
+            $jobs->where('jobType', "=", $jobtype);
         }
-        if ($request->range) {
-            $strSplit = explode("-", $request->range);
+        if ($joblevel) {
+            $jobs->where('jobLevel', '=', $joblevel);
+        }
+        if ($salary) {
+            $money =
+                str_replace('$', '', $salary);
+                $strSplit = explode("-", $money);
             $minRange = $strSplit[0];
             $maxRange = $strSplit[1];
             $jobs->whereBetween('salary', [$minRange, $maxRange]);
