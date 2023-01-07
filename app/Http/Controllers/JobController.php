@@ -65,7 +65,8 @@ class JobController extends Controller
         $jobTitle = $request->input('title');
         $location = $request->input('location');
         $employmentType = $request->input('employmentType');
-        $category = $request->input('categories');
+        $categories = $request->input('categories');
+        $category = $request->input('category');
         $joblevel = $request->input('jobLevel');
         $salary = $request->input('salary');
         $jobtype = $request->input('jobtype');
@@ -73,7 +74,7 @@ class JobController extends Controller
 
         $jobs = Job::where('jobTitle', 'LIKE', '%' . $jobTitle . '%');
 
-        if ($location != 'ALL') {
+        if ($location) {
             $jobs->where('location', $location);
         }
         if ($employmentType) {
@@ -81,6 +82,9 @@ class JobController extends Controller
         }
         if ($category) {
             $jobs->where('category', "=", $category);
+        }
+        if ($categories) {
+            $jobs->where('category', "=", $categories);
         }
         if ($jobtype) {
             $jobs->where('jobType', "=", $jobtype);
